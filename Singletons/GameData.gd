@@ -11,7 +11,7 @@ var tower_data = {
 		"rof": 1,
 		"range": 350
 	},
-	"MissleT1": {
+	"MissileT1": {
 		"damage": 100,
 		"rof": 3,
 		"range": 550
