@@ -3,6 +3,9 @@ extends Node2D
 var enemy_array = []
 var built = false
 var enemy
+var type
+var category
+var ready = true
 
 func _ready():
 	if built:
@@ -11,7 +14,10 @@ func _ready():
 func _physics_process(delta):
 	if built and enemy_array.size() != 0:
 		select_enemy()
-		turn()
+		if not get_node("AnimationPlayer").is_playing():
+			turn()
+		if ready:
+			fire()
 	else:
 		enemy = null
 	
@@ -25,9 +31,25 @@ func select_enemy():
 	var max_offset = enemy_progress_array.max()
 	var enemy_index = enemy_progress_array.find(max_offset)
 	enemy = enemy_array[enemy_index]
+
+func fire():
+	ready = false
+	if category == "Projectile":
+		fire_gun()
+	elif category == "Missile":
+		fire_missile()
+	enemy.on_hit(GameData.tower_data[type]["damage"])
+	yield(get_tree().create_timer(GameData.tower_data[type]["rof"]), "timeout")
+	ready = true
+	
+func fire_gun():
+	get_node("AnimationPlayer").play("Fire")
+
+func fire_missile():
+	pass
 	
 func set_turret_range():
-	var turret_range = GameData.tower_data[self.get_name()]["range"]
+	var turret_range = GameData.tower_data[type]["range"]
 	self.get_node("Range/CollisionShape2D").get_shape().radius = turret_range * 0.5
 
 
