@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Maps/Map1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Towers/towerDefense_tile249.png" type="Texture" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://Assets/Icons/right.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Icons/pause.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Icons/fastForward.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Ui/HPbar.jpg" type="Texture" id=11]
+[ext_resource path="res://Assets/Icons/plus.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Fonts/kfn_30_1.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Resources/Fonts/kfn_50_1.tres" type="DynamicFont" id=14]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -22,8 +26,10 @@ script = ExtResource( 6 )
 [node name="HUD" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.05945
-margin_right = 1.05945
+margin_left = 3.51673
+margin_top = -6.01791
+margin_right = 3.51672
+margin_bottom = -6.01794
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -179,6 +185,83 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="InfoBar" type="ColorRect" parent="UI/HUD"]
+self_modulate = Color( 0, 0, 0, 0.470588 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 60 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MC" type="MarginContainer" parent="UI/HUD/InfoBar"]
+anchor_right = 1.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/margin_right = 60
+custom_constants/margin_left = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="H" type="HBoxContainer" parent="UI/HUD/InfoBar/MC"]
+margin_left = 60.0
+margin_right = 1220.0
+margin_bottom = 60.0
+
+[node name="H" type="HBoxContainer" parent="UI/HUD/InfoBar/MC/H"]
+margin_right = 702.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="Symbol" type="Label" parent="UI/HUD/InfoBar/MC/H/H"]
+margin_top = 1.0
+margin_right = 42.0
+margin_bottom = 58.0
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 14 )
+text = "$"
+align = 1
+valign = 1
+
+[node name="Money" type="Label" parent="UI/HUD/InfoBar/MC/H/H"]
+margin_left = 46.0
+margin_top = 12.0
+margin_right = 172.0
+margin_bottom = 47.0
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 13 )
+text = "999999"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/InfoBar/MC/H"]
+margin_left = 706.0
+margin_top = 5.0
+margin_right = 756.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 12 )
+expand = true
+
+[node name="HP" type="TextureProgress" parent="UI/HUD/InfoBar/MC/H"]
+margin_left = 760.0
+margin_top = 15.0
+margin_right = 1160.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 400, 30 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 11 )
+tint_under = Color( 0.666667, 0.666667, 0.666667, 1 )
+tint_progress = Color( 0.282353, 0.862745, 0.505882, 1 )
+nine_patch_stretch = true
+
+[node name="Tween" type="Tween" parent="UI/HUD/InfoBar/MC/H/HP"]
 
 [connection signal="pressed" from="UI/HUD/GameControls/HBox/PausePlay" to="UI" method="_on_PausePlay_pressed"]
 [connection signal="pressed" from="UI/HUD/GameControls/HBox/SpeedUp" to="UI" method="_on_SpeedUp_pressed"]

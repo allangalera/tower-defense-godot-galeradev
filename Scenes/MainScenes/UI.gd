@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-var tower_range = 350
+onready var hp_bar = get_node("HUD/InfoBar/MC/H/HP")
+onready var hp_bar_tween = get_node("HUD/InfoBar/MC/H/HP/Tween")
+onready var play_pause_btn = get_node("HUD/GameControls/HBox/PausePlay")
 
 func set_tower_preview(tower_type, mouse_position):
 	var drag_tower = load("res://Scenes/Turrets/" + tower_type + ".tscn").instance()
@@ -35,10 +37,11 @@ func update_tower_preview(new_position, color):
 func _on_PausePlay_pressed():
 	if get_parent().build_mode:
 		get_parent().cancel_build_mode()
+		
 	if get_tree().is_paused():
 		get_tree().paused = false
-	elif get_parent().current_wave == 0:
-		get_parent().current_wave += 1;
+	elif not get_parent().wave_in_motion:
+		get_parent().current_wave += 1
 		get_parent().start_next_wave()
 	else:
 		get_tree().paused = true
@@ -50,3 +53,16 @@ func _on_SpeedUp_pressed():
 		Engine.set_time_scale(1.0)
 	else:
 		Engine.set_time_scale(2.0)
+		
+func update_health_bar(base_health):
+	hp_bar_tween.interpolate_property(hp_bar, "value", hp_bar.value, base_health, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	hp_bar_tween.start()
+	if base_health >= 60:
+		hp_bar.set_tint_progress("48dc81")
+	elif base_health <= 60 and base_health >= 25:
+		hp_bar.set_tint_progress("DC8047")
+	else:
+		hp_bar.set_tint_progress("DC4771")
+
+func finished_wave():
+	play_pause_btn.set_pressed(false)
