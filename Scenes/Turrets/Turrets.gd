@@ -7,9 +7,15 @@ var type
 var category
 var ready = true
 
+onready var tower_data = get_tower_data()
+
 func _ready():
 	if built:
 		set_turret_range()
+	
+func get_tower_data():
+	var tower_name = filename.get_file().trim_suffix('.' + filename.get_extension())
+	return GameData.towers[tower_name]
 
 func _physics_process(delta):
 	if built and enemy_array.size() != 0:
@@ -38,8 +44,8 @@ func fire():
 		fire_gun()
 	elif category == "Missile":
 		fire_missile()
-	enemy.on_hit(GameData.tower_data[type]["damage"])
-	yield(get_tree().create_timer(GameData.tower_data[type]["rof"]), "timeout")
+	enemy.on_hit(tower_data["damage"])
+	yield(get_tree().create_timer(tower_data["rof"]), "timeout")
 	ready = true
 	
 func fire_gun():
@@ -49,7 +55,7 @@ func fire_missile():
 	pass
 	
 func set_turret_range():
-	var turret_range = GameData.tower_data[type]["range"]
+	var turret_range = tower_data["range"]
 	self.get_node("Range/CollisionShape2D").get_shape().radius = turret_range * 0.5
 
 

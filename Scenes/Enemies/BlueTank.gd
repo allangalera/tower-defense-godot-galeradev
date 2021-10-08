@@ -2,37 +2,42 @@ extends PathFollow2D
 
 signal base_damage(damage)
 signal last_enemy()
+signal im_ded(enemy)
 
-var speed = 150
-var hp = 50
-var base_damage = 21
+onready var enemy_data = get_enemy_data()
+var current_health
 
 onready var hp_bar = get_node("HPBar")
 onready var impact_area = get_node("Impact")
 var projectile_impact = preload("res://Scenes/Support/ProjectileImpact.tscn")
 
 func _ready():
-	hp_bar.max_value = hp
-	hp_bar.value = hp
+	current_health = enemy_data.health
+	hp_bar.max_value = enemy_data.health
+	hp_bar.value = enemy_data.health
 	hp_bar.set_as_toplevel(true)
+	
+func get_enemy_data():
+	var tower_name = filename.get_file().trim_suffix('.' + filename.get_extension())
+	return GameData.enemies[tower_name]
 
 func _physics_process(delta):
 	if  unit_offset == 1.0:
-		emit_signal("base_damage", base_damage)
+		emit_signal("base_damage", enemy_data.base_damage)
 		on_unload()
 	move(delta)
 	
 func move(delta):
-	set_offset(get_offset() + speed * delta)
+	set_offset(get_offset() + enemy_data.speed * delta)
 	hp_bar.set_position(position - Vector2(30, 40))
 	
 func on_hit(damage):
 	impact()
-	hp -= damage
-	hp_bar.value = hp
-	if (!hp_bar.visible && hp < hp_bar.max_value):
+	current_health -= damage
+	hp_bar.value = current_health
+	if (!hp_bar.visible && current_health < enemy_data.health):
 		hp_bar.visible = true
-	if hp <= 0:
+	if current_health <= 0:
 		on_destroy()
 		
 func impact():
@@ -48,6 +53,7 @@ func impact():
 func on_destroy():
 	get_node("KinematicBody2D").queue_free()
 	yield(get_tree().create_timer(0.2), "timeout")
+	emit_signal("im_ded", enemy_data)
 	on_unload()
 	
 func on_unload():
