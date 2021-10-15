@@ -2,7 +2,8 @@ extends Node2D
 
 signal game_finished(result)
 
-var map_node
+var map_instance
+var base_health_init = 100
 var base_health = 100
 var money = 100
 var build_mode = false
@@ -14,11 +15,13 @@ var current_wave = 0
 var wave_in_motion = false
 var enemies_in_wave
 var map_data
+var current_map = "Map1"
 onready var ui_node = get_node('UI')
 
 func _ready():
-	map_node = get_node("Map1")
-	map_data = GameData.maps["Map1"]
+	map_data = GameData.maps[current_map]
+	map_instance = load(map_data.path).instance()
+	add_child(map_instance)
 	ui_node.update_money(money)
 	ui_node.update_current_wave(0, map_data.waves.size())
 	for i in get_tree().get_nodes_in_group("build_buttons"):
@@ -56,7 +59,7 @@ func spawn_enemies(wave_data):
 		new_enemy.connect("base_damage", self, "on_base_damage")
 		new_enemy.connect("last_enemy", self, "on_last_enemy")
 		new_enemy.connect("im_ded", self, "on_enemy_kill")
-		map_node.get_node("Path").add_child(new_enemy, true)
+		map_instance.get_node("Path").add_child(new_enemy, true)
 		yield(get_tree().create_timer(enemy.waitTime), "timeout")
 
 ##
@@ -77,10 +80,10 @@ func initiate_build_mode(tower_type):
 	
 func update_tower_preview():
 	var mouse_position = get_global_mouse_position()
-	var current_tile = map_node.get_node("TowerExclusion").world_to_map(mouse_position)
-	var tile_position = map_node.get_node("TowerExclusion").map_to_world(current_tile)
+	var current_tile = map_instance.get_node("TowerExclusion").world_to_map(mouse_position)
+	var tile_position = map_instance.get_node("TowerExclusion").map_to_world(current_tile)
 	
-	if map_node.get_node("TowerExclusion").get_cellv(current_tile) == -1:
+	if map_instance.get_node("TowerExclusion").get_cellv(current_tile) == -1:
 		ui_node.update_tower_preview(tile_position, "ad54ff3c")
 		build_valid = true
 		build_location = tile_position
@@ -105,15 +108,15 @@ func verify_and_build():
 		new_tower.type = build_type
 		new_tower.category = tower_data.category
 		sub_money(tower_data.cost)
-		map_node.get_node("Turrets").add_child(new_tower, true)
-		map_node.get_node("TowerExclusion").set_cellv(build_tile, 5)
+		map_instance.get_node("Turrets").add_child(new_tower, true)
+		map_instance.get_node("TowerExclusion").set_cellv(build_tile, 5)
 		if (tower_data.cost > money):
 			cancel_build_mode()
 
 func on_base_damage(damage):
 	base_health -= damage
 	if base_health <= 0:
-		emit_signal("game_finished", false)
+		show_result(false)
 	else:
 		ui_node.update_health_bar(base_health)
 		
@@ -133,5 +136,15 @@ func on_last_enemy():
 	current_wave += 1
 	var has_next_wave = current_wave < map_data.waves.size()
 	if base_health > 0 and not has_next_wave:
-		emit_signal("game_finished", true)
+		show_result(true)
 	ui_node.finished_wave()
+	
+func show_result(result):
+	var score = {
+		"number_of_waves": map_data.waves.size(),
+		"current_wave": current_wave,
+		"health_init": base_health_init,
+		"health_remain": max(base_health, 0),
+		"result": result,
+	}
+	emit_signal("game_finished", score)

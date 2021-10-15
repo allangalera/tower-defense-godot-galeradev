@@ -102,5 +102,313 @@ var maps =  {
 				}
 			]
 		]
+	},
+	"Map2": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map3": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map4": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map5": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map6": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map7": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map8": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map9": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map10": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map11": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map12": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map13": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map14": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map15": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map16": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map17": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map18": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map19": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map20": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map21": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map22": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map23": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map24": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map25": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map26": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map27": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map28": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
+	},
+	"Map29": {
+		"path": "res://Scenes/Maps/Map1.tscn",
+		"waves": [
+			[
+				{
+					"name": "BlueTank",
+					"waitTime": 2.0,
+				}
+			]
+		]
 	}
 }
